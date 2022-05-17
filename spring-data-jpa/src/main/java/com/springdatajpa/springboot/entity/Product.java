@@ -1,9 +1,6 @@
 package com.springdatajpa.springboot.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,6 +13,31 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+
+//@NamedQuery(
+//        name="Product.findByPrice",
+//        query = "SELECT p from Product p where p.price = :price"
+//)
+
+@NamedQueries({
+        @NamedQuery(
+                name="Product.findAllOrderByNameDesc",
+                query = "SELECT p from Product p ORDER BY p.name desc "
+        ),
+        @NamedQuery(
+                name="Product.findByPrice",
+                query = "SELECT p from Product p where p.price=:price"
+        )
+})
+
+
+@NamedNativeQuery(
+        name="Product.findByDescription",
+        query = "SELECT * from products p where p.description = :description",
+        resultClass = Product.class
+)
+
 @Table(
         name = "products",
         schema = "ecommerce",
