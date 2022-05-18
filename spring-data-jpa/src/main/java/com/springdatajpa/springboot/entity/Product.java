@@ -32,11 +32,24 @@ import java.time.LocalDateTime;
 })
 
 
-@NamedNativeQuery(
-        name="Product.findByDescription",
-        query = "SELECT * from products p where p.description = :description",
-        resultClass = Product.class
-)
+//@NamedNativeQuery(
+//        name="Product.findByDescription",
+//        query = "SELECT * from products p where p.description = :description",
+//        resultClass = Product.class
+//)
+
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "Product.findByDescription",
+                query = "SELECT * from products p where p.description = :description",
+                resultClass = Product.class
+        ),
+        @NamedNativeQuery(
+                name="Product.findAllOrderByASC",
+                query = "SELECT * from products order by name asc",
+                resultClass = Product.class
+        )
+})
 
 @Table(
         name = "products",

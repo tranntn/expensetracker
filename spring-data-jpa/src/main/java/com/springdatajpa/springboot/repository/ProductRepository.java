@@ -73,4 +73,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(nativeQuery = true)
     Product findByDescription(@Param("description") String description);
 
+    @Query(nativeQuery = true)
+    List<Product> findAllOrderByASC();
+
 }

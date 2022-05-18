@@ -25,4 +25,5 @@ public class NativeSQLQueriesTest {
         System.out.println(product.getName());
         System.out.println(product.getDescription());
     }
+
 }

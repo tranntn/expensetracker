@@ -30,13 +30,13 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("SELECT s from Student s where s.firstName = ?1 or s.lastName = ?2")
     Student findStudentByFirstNameOrLastNameJPQLIndexedParam(String firstName, String lastName);
 
-    @Query("SELECT s from Student s where s.firstName = :firstname or s.lastName = :lastName")
+    @Query("SELECT s from Student s where s.firstName = :firstName or s.lastName = :lastName")
     Student findStudentByFirstNameOrLastNameJPQLNamedParam(@Param("firstName") String firstName,@Param("lastName") String lastName);
 
-    @Query(value = "select * from students s where s.firstname = ?1 or s.lastName = ?2 ", nativeQuery = true)
+    @Query(value = "select * from students s where s.first_name = ?1 or s.last_name = ?2 ", nativeQuery = true)
     Student findStudentByFirstNameOrLastNameSQLIndexedParam(String firstName, String lastName);
 
-    @Query(value = "select * from students s where s.firstName = :firstName or s.lastName= :lastName", nativeQuery = true)
+    @Query(value = "select * from students s where s.first_name = :firstName or s.last_name= :lastName", nativeQuery = true)
     Student findStudentByFirstNameOrLastNameSQLNamedParam(@Param("firstName") String firstName,@Param("lastName") String lastName);
 
 
@@ -46,10 +46,15 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("SELECT s from Student s where s.firstName=:firstName and s.lastName =:lastName")
     Student findStudentByFirstNameAndLastNameJPQLNamedParam(@Param("firstName") String firstName,@Param("lastName") String lastName);
 
-    @Query(value = "select * from students s where s.firstName = ?1 and s.lastName = ?2", nativeQuery = true)
+    @Query(value = "select * from students s where s.first_name = ?1 and s.last_name = ?2", nativeQuery = true)
     Student findStudentByFirstNameAndLastNameSQLIndexedParam(String firstName, String lastName);
 
-    @Query(value = "select * from students s where s.firstName =:firstName and s.lastName = :lastname", nativeQuery = true)
-    Student findStudentByFirstNameAndLastNameSQLNamedParam(String firstName, String lastName);
+    @Query(value = "select * from students s where s.first_name = :firstName and s.last_name = :lastName", nativeQuery = true)
+    Student findStudentByFirstNameAndLastNameSQLNamedParam(@Param("firstName") String firstName,@Param("lastName") String lastName);
+
+    Student findByFirstNameOrLastNameJPQL(@Param("firstName") String firstName,@Param("lastName") String lastName);
+
+    @Query(nativeQuery = true)
+    Student findByFirstNameOrLastNameSQL(@Param("firstName") String firstName,@Param("lastName") String lastName);
 
 }

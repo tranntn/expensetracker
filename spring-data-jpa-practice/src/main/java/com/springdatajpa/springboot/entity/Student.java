@@ -13,6 +13,21 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @ToString
+@NamedQueries({
+        @NamedQuery(
+                name="Student.findByFirstNameOrLastNameJPQL",
+                query = "select s from Student s where s.firstName = :firstName or s.lastName = :lastName"
+        )
+})
+
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name="Student.findByFirstNameOrLastNameSQL",
+                query = "select * from students s where  s.first_name = :firstName and s.last_name = :lastName",
+                resultClass = Student.class
+        )
+})
+
 @Table(name = "students")
 public class Student {
     @Id

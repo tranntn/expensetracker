@@ -35,9 +35,23 @@ public class NamedQueriesTest {
     }
 
     @Test
-    void findByDescription(){
+    void namedNativeSQLQuery(){
         Product product = productRepository.findByDescription("product 2 description");
         System.out.println(product.getName());
         System.out.println(product.getDescription());
+    }
+
+    @Test
+    void namedNativeSQLQueries(){
+        Product product= productRepository.findByDescription("product 2 description");
+
+        System.out.println(product.getName());
+        System.out.println(product.getDescription());
+
+        List<Product> products = productRepository.findAllOrderByASC();
+        products.forEach(product1 -> {
+            System.out.println(product.getName());
+            System.out.println(product.getDescription());
+        });
     }
 }
