@@ -6,6 +6,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -49,4 +51,21 @@ public class Student {
     @Column(name = "last_updated")
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "students_courses",
+            joinColumns = @JoinColumn(
+                    name = "student_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "course_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private Set<Course> courses = new HashSet<>();
 }
