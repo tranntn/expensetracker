@@ -52,18 +52,18 @@ public class Student {
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
+            CascadeType.MERGE,
+            CascadeType.PERSIST
     })
     @JoinTable(
             name = "students_courses",
             joinColumns = @JoinColumn(
-                    name = "student_id",
+                    name = "students_id",
                     referencedColumnName = "id"
             ),
             inverseJoinColumns = @JoinColumn(
-                    name = "course_id",
+                    name = "courses_id",
                     referencedColumnName = "id"
             )
     )
